@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Look</title>
+    <style>
+        /* Estilos básicos da página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; 
+        }
+
+        /* Estilo da foto no canto esquerdo */
+        .foto-canto {
+            position: absolute;
+            left: 20px; /* Distância da borda da tela */
+            width: 40px;  /* Tamanho da foto */
+            height: 40px; /* Tamanho da foto */
+            object-type: cover; 
+            object-fit: cover;
+            border-radius: 50%; /* Deixa a foto redonda */
+            border: 2px solid white;
+        }
+
+        /* Barra de topo */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-left: 70px; /* Espaço para a foto não tampar os risquinhos */
+            position: relative;
+        }
+
+        /* O botão dos 3 risquinhos (Hambúrguer) */
+        .menu-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        /* Cada risquinho */
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* Título do site */
+        header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        /* A Barra de Navegação Lateral */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #444;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+            padding-top: 70px;
+        }
+
+        .nav-bar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-bar ul li a {
+            display: block;
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-bottom: 1px solid #555;
+            transition: background 0.2s;
+        }
+
+        .nav-bar ul li a:hover {
+            background-color: #555;
+        }
+
+        /* Classe para abrir o menu */
+        .nav-bar.ativo {
+            left: 0;
+        }
+
+        /* Efeito do "X" no botão */
+        .menu-toggle.ativo span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-toggle.ativo span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.ativo span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Lembre-se de colocar a extensão correta da imagem, ex: .png ou .jpg -->
+        <img src="imagens/logosmlook.png" alt="Logo Smart Look" class="foto-canto">
+
+        <!-- Botão dos 3 risquinhos -->
+        <button class="menu-toggle" id="menu-btn" aria-label="Abrir Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <h2>Smart Look</h2>
+    </header>
+
+    <!-- A Nav Bar Lateral -->
+    <nav class="nav-bar" id="nav-menu">
+        <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Serviços</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- Script JavaScript -->
+    <script>
+        const btnMobile = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        btnMobile.addEventListener('click', () => {
+            navMenu.classList.toggle('ativo');
+            btnMobile.classList.toggle('ativo');
+        });
+    </script>
+
+</body>
+</html>
