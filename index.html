@@ -11,25 +11,26 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden; 
+            font-family: Arial, sans-serif;
+            background-color: #eebbc4;
         }
 
         /* Estilo da foto no canto esquerdo */
         .foto-canto {
             position: absolute;
-            left: 20px; /* Distância da borda da tela */
-            width: 40px;  /* Tamanho da foto */
-            height: 40px; /* Tamanho da foto */
-            object-type: cover; 
+            top: -27px;
+            left: -10px; /* Distância da borda da tela */
+            width: 90px;  /* Tamanho da foto */
+            height: 90px; /* Tamanho da foto */
             object-fit: cover;
             border-radius: 50%; /* Deixa a foto redonda */
-            border: 2px solid white;
         }
 
         /* Barra de topo */
         header {
-            background-color: #333;
+            background-color: #ad6a6c;
             color: white;
-            padding: 15px 20px;
+            padding: 20px 90px;
             display: flex;
             align-items: center;
             gap: 20px;
@@ -72,7 +73,7 @@
             left: -250px;
             width: 250px;
             height: 100%;
-            background-color: #444;
+            background-color: #ad6a6c;
             transition: left 0.3s ease;
             z-index: 1000;
             box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
