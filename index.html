@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Look</title>
+    <!-- Adicionando os ícones profissionais do FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         /* Estilos básicos da página */
         body {
@@ -11,19 +14,18 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden; 
-            font-family: Arial, sans-serif;
             background-color: #eebbc4;
         }
 
-        /* Estilo da foto no canto esquerdo */
+        /* Estilo da foto no canto esquerdo do header */
         .foto-canto {
             position: absolute;
             top: -27px;
-            left: -10px; /* Distância da borda da tela */
-            width: 90px;  /* Tamanho da foto */
-            height: 90px; /* Tamanho da foto */
+            left: -10px;
+            width: 90px;
+            height: 90px;
             object-fit: cover;
-            border-radius: 50%; /* Deixa a foto redonda */
+            border-radius: 50%;
         }
 
         /* Barra de topo */
@@ -34,7 +36,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            padding-left: 70px; /* Espaço para a foto não tampar os risquinhos */
+            padding-left: 70px;
             position: relative;
         }
 
@@ -64,6 +66,28 @@
         header h2 {
             margin: 0;
             font-size: 1.2rem;
+        }
+
+        /* Ícone do carrinho no canto superior direito */
+        .icone-carrinho {
+            position: absolute;
+            right: 25px;
+            cursor: pointer;
+            background: #fff;
+            color: #ad6a6c;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .icone-carrinho i {
+            font-size: 1rem;
         }
 
         /* A Barra de Navegação Lateral */
@@ -96,7 +120,7 @@
         }
 
         .nav-bar ul li a:hover {
-            background-color: #555;
+            background-color: #8b5355;
         }
 
         /* Classe para abrir o menu */
@@ -114,12 +138,170 @@
         .menu-toggle.ativo span:nth-child(3) {
             transform: rotate(-45deg) translate(7px, -6px);
         }
+
+        /* Vitrine de Produtos de Exemplo */
+        .produtos-container {
+            display: flex;
+            gap: 20px;
+            padding: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .produto {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 220px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Foto do produto na vitrine */
+        .produto-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .produto h3 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .produto p {
+            color: #ad6a6c;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .produto button {
+            background-color: #ad6a6c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .produto button:hover {
+            background-color: #8b5355;
+        }
+
+        /* Gaveta do Carrinho (Lateral Direita) */
+        .gaveta {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 320px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.2);
+            transition: right 0.3s ease;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .gaveta.ativa {
+            right: 0;
+        }
+
+        .gaveta-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+
+        .gaveta-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .botao-fechar {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        #lista-carrinho {
+            list-style: none;
+            padding: 0;
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        /* Estilo do item dentro do carrinho (com miniatura da foto na esquerda) */
+        #lista-carrinho li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+            font-size: 0.85rem;
+            color: #444;
+        }
+
+        .carrinho-item-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        /* Miniatura da foto no carrinho */
+        .carrinho-img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .gaveta-footer {
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        .gaveta-footer p {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .botao-finalizar {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <!-- Lembre-se de colocar a extensão correta da imagem, ex: .png ou .jpg -->
+        <!-- Logo no canto esquerdo -->
         <img src="imagens/logosmlook.png" alt="Logo Smart Look" class="foto-canto">
 
         <!-- Botão dos 3 risquinhos -->
@@ -130,20 +312,59 @@
         </button>
         
         <h2>Smart Look</h2>
+
+        <!-- Ícone Profissional de Sacola no Canto Direito -->
+        <div class="icone-carrinho" onclick="toggleCarrinho()">
+            <i class="fa-solid fa-bag-shopping"></i> <span id="contador-carrinho">0</span>
+        </div>
     </header>
 
-    <!-- A Nav Bar Lateral -->
+    <!-- A Nav Bar Lateral (Menu) -->
     <nav class="nav-bar" id="nav-menu">
         <ul>
             <li><a href="#">Início</a></li>
             <li><a href="#">Sobre</a></li>
-            <li><a href="#">Serviços</a></li>
+            <li><a href="#">Produtos</a></li>
             <li><a href="#">Contato</a></li>
         </ul>
     </nav>
 
+    <!-- Vitrine de Produtos de Exemplo -->
+    <main>
+        <section class="produtos-container">
+            <div class="produto">
+                <!-- Foto do produto em cima do nome e preço -->
+                <img src="imagens/wardrobe.png" alt="Guarda Roupa Inteligente" class="produto-img">
+                
+                <h3>Guarda Roupa Inteligente</h3>
+                <p>R$ 449,99</p>
+                
+                <!-- Passamos o nome, preço e o caminho da foto na função -->
+                <button onclick="adicionarAoCarrinho('Guarda Roupa Inteligente', 449.99, 'imagens/wardrobe.png')">Adicionar</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Gaveta do Carrinho (Lateral) -->
+    <div id="gaveta-carrinho" class="gaveta">
+        <div class="gaveta-header">
+            <h2>Sua Sacola</h2>
+            <button onclick="toggleCarrinho()" class="botao-fechar">&times;</button>
+        </div>
+        
+        <ul id="lista-carrinho">
+            <!-- Itens aparecem dinamicamente -->
+        </ul>
+
+        <div class="gaveta-footer">
+            <p>Total: R$ <span id="valor-total">0,00</span></p>
+            <button onclick="finalizarCompra()" class="botao-finalizar">Finalizar Compra</button>
+        </div>
+    </div>
+
     <!-- Script JavaScript -->
     <script>
+        // Lógica do Menu Hambúrguer
         const btnMobile = document.getElementById('menu-btn');
         const navMenu = document.getElementById('nav-menu');
 
@@ -151,6 +372,80 @@
             navMenu.classList.toggle('ativo');
             btnMobile.classList.toggle('ativo');
         });
+
+        // Lógica do Carrinho de Compras
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+        function toggleCarrinho() {
+            const gaveta = document.getElementById('gaveta-carrinho');
+            gaveta.classList.toggle('ativa');
+        }
+
+        // Adicionada a variável 'imagem' para receber a foto do produto
+        function adicionarAoCarrinho(nome, preco, imagem) {
+            carrinho.push({ nome, preco, imagem });
+            salvarEAtualizar();
+            toggleCarrinho(); 
+        }
+
+        function removerDoCarrinho(index) {
+            carrinho.splice(index, 1);
+            salvarEAtualizar();
+        }
+
+        function salvarEAtualizar() {
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            atualizarCarrinhoHTML();
+        }
+
+        function atualizarCarrinhoHTML() {
+            const lista = document.getElementById('lista-carrinho');
+            const valorTotalSpan = document.getElementById('valor-total');
+            const contadorCarrinho = document.getElementById('contador-carrinho');
+            
+            lista.innerHTML = '';
+            let total = 0;
+
+            contadorCarrinho.innerText = carrinho.length;
+
+            if (carrinho.length === 0) {
+                lista.innerHTML = '<li style="justify-content: center; color: #777; border:none; margin-top:20px;">Sua sacola está vazia</li>';
+            } else {
+                carrinho.forEach((item, index) => {
+                    total += item.preco;
+                    let li = document.createElement('li');
+                    
+                    // Estruturando o item com a fotinho pequena na esquerda
+                    li.innerHTML = `
+                        <div class="carrinho-item-info">
+                            <img src="${item.imagem}" alt="${item.nome}" class="carrinho-img">
+                            <div>
+                                <strong>${item.nome}</strong><br>
+                                <span>R$ ${item.preco.toFixed(2)}</span>
+                            </div>
+                        </div>
+                        <button onclick="removerDoCarrinho(${index})" style="background: none; border: none; color: red; cursor: pointer; font-size: 16px;"><i class="fa-solid fa-trash"></i></button>
+                    `;
+                    lista.appendChild(li);
+                });
+            }
+
+            valorTotalSpan.innerText = total.toFixed(2);
+        }
+
+        function finalizarCompra() {
+            if (carrinho.length === 0) {
+                alert('Sua sacola está vazia!');
+                return;
+            }
+            alert('Compra simulada com sucesso! Obrigado por testar o protótipo.');
+            carrinho = [];
+            salvarEAtualizar();
+            toggleCarrinho();
+        }
+
+        // Executa ao carregar a página
+        atualizarCarrinhoHTML();
     </script>
 
 </body>
