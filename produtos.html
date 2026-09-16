@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Look - Produtos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; 
+            background-color: #eebbc4;
+        }
+
+        .foto-canto {
+            position: absolute;
+            top: -27px;
+            left: -10px;
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 0.2s;
+        }
+
+        .foto-canto:hover {
+            transform: scale(1.05);
+        }
+
+        header {
+            background-color: #ad6a6c;
+            color: white;
+            padding: 20px 90px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-left: 70px;
+            position: relative;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .icone-carrinho {
+            position: absolute;
+            right: 25px;
+            cursor: pointer;
+            background: #fff;
+            color: #ad6a6c;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .icone-carrinho i {
+            font-size: 1rem;
+        }
+
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #ad6a6c;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+            padding-top: 70px;
+        }
+
+        .nav-bar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-bar ul li a {
+            display: block;
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            border-bottom: 1px solid #555;
+            transition: background 0.2s;
+        }
+
+        .nav-bar ul li a:hover {
+            background-color: #8b5355;
+        }
+
+        .nav-bar.ativo {
+            left: 0;
+        }
+
+       /* Informações acadêmicas na Navbar */
+        .nav-info-academica {
+            margin-top: 30px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+        }
+
+        .nav-info-academica p {
+            margin: 0 0 5px 0;
+            color: #fce4e6;
+            font-size: 0.9rem;
+        }
+
+        .nav-materia {
+            font-weight: bold;
+        }
+        .menu-toggle.ativo span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-toggle.ativo span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.ativo span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .produtos-container {
+            display: flex;
+            gap: 20px;
+            padding: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .produto {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 220px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .produto-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .produto h3 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .produto p {
+            color: #ad6a6c;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .produto button {
+            background-color: #ad6a6c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .produto button:hover {
+            background-color: #8b5355;
+        }
+
+        .gaveta {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 320px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.2);
+            transition: right 0.3s ease;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .gaveta.ativa {
+            right: 0;
+        }
+
+        .gaveta-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+
+        .gaveta-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .botao-fechar {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        #lista-carrinho {
+            list-style: none;
+            padding: 0;
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        #lista-carrinho li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+            font-size: 0.85rem;
+            color: #444;
+        }
+
+        .carrinho-item-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .carrinho-img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .gaveta-footer {
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        .gaveta-footer p {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .botao-finalizar {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html">
+            <img src="imagens/logosmlook.png" alt="Logo Smart Look" class="foto-canto">
+        </a>
+
+        <button class="menu-toggle" id="menu-btn" aria-label="Abrir Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <a href="index.html" style="text-decoration: none; color: white;">
+            <h2>Smart Look</h2>
+        </a>
+
+        <div class="icone-carrinho" onclick="toggleCarrinho()">
+            <i class="fa-solid fa-bag-shopping"></i> <span id="contador-carrinho">0</span>
+        </div>
+    </header>
+
+   <nav class="nav-bar" id="nav-menu">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="produtos.html">Produtos</a></li>
+        </ul>
+        
+        <div class="nav-info-academica">
+            <p class="nav-materia">Matéria: P.O.R.A</p>
+            <p class="nav-prof">Professora: Rose</p>
+        </div>
+    </nav>
+
+    <main>
+        <section class="produtos-container">
+            <div class="produto">
+                <img src="imagens/guarda-roupa.jpg" alt="Guarda Roupa Inteligente" class="produto-img">
+                <h3>Guarda Roupa Inteligente</h3>
+                <p>R$ 449,99</p>
+                <button onclick="adicionarAoCarrinho('Guarda Roupa Inteligente', 449.99, 'imagens/guarda-roupa.jpg')">Adicionar</button>
+            </div>
+        </section>
+    </main>
+
+    <div id="gaveta-carrinho" class="gaveta">
+        <div class="gaveta-header">
+            <h2>Sua Sacola</h2>
+            <button onclick="toggleCarrinho()" class="botao-fechar">&times;</button>
+        </div>
+        
+        <ul id="lista-carrinho"></ul>
+
+        <div class="gaveta-footer">
+            <p>Total: R$ <span id="valor-total">0,00</span></p>
+            <button onclick="finalizarCompra()" class="botao-finalizar">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <script>
+        const btnMobile = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        btnMobile.addEventListener('click', () => {
+            navMenu.classList.toggle('ativo');
+            btnMobile.classList.toggle('ativo');
+        });
+
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            atualizarCarrinhoHTML();
+        });
+
+        function toggleCarrinho() {
+            const gaveta = document.getElementById('gaveta-carrinho');
+            gaveta.classList.toggle('ativa');
+        }
+
+        function adicionarAoCarrinho(nome, preco, imagem) {
+            carrinho.push({ nome, preco, imagem });
+            salvarEAtualizar();
+            toggleCarrinho(); 
+        }
+
+        function removerDoCarrinho(index) {
+            carrinho.splice(index, 1);
+            salvarEAtualizar();
+        }
+
+        function salvarEAtualizar() {
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            atualizarCarrinhoHTML();
+        }
+
+        function atualizarCarrinhoHTML() {
+            const lista = document.getElementById('lista-carrinho');
+            const valorTotalSpan = document.getElementById('valor-total');
+            const contadorCarrinho = document.getElementById('contador-carrinho');
+            
+            lista.innerHTML = '';
+            let total = 0;
+
+            contadorCarrinho.innerText = carrinho.length;
+
+            if (carrinho.length === 0) {
+                lista.innerHTML = '<li style="justify-content: center; color: #777; border:none; margin-top:20px;">Sua sacola está vazia</li>';
+            } else {
+                carrinho.forEach((item, index) => {
+                    total += item.preco;
+                    let li = document.createElement('li');
+                    li.innerHTML = `
+                        <div class="carrinho-item-info">
+                            <img src="${item.imagem}" alt="${item.nome}" class="carrinho-img">
+                            <div>
+                                <strong>${item.nome}</strong><br>
+                                <span>R$ ${item.preco.toFixed(2)}</span>
+                            </div>
+                        </div>
+                        <button onclick="removerDoCarrinho(${index})" style="background: none; border: none; color: red; cursor: pointer; font-size: 16px;"><i class="fa-solid fa-trash"></i></button>
+                    `;
+                    lista.appendChild(li);
+                });
+            }
+
+            valorTotalSpan.innerText = total.toFixed(2);
+        }
+
+        function finalizarCompra() {
+            if (carrinho.length === 0) {
+                alert('Sua sacola está vazia!');
+                return;
+            }
+            alert('Compra realizada com sucesso!');
+            carrinho = [];
+            salvarEAtualizar();
+            toggleCarrinho();
+        }
+    </script>
+</body>
+</html>

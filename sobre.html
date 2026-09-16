@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Look - Início</title>
-    <!-- Ícones do FontAwesome -->
+    <title>Smart Look - Sobre</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -128,7 +127,8 @@
         .nav-bar.ativo {
             left: 0;
         }
-/* Informações acadêmicas na Navbar */
+
+        /* Informações acadêmicas na Navbar */
         .nav-info-academica {
             margin-top: 30px;
             padding: 0 20px;
@@ -146,6 +146,7 @@
         .nav-materia {
             font-weight: bold;
         }
+
         .menu-toggle.ativo span:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
         }
@@ -156,113 +157,27 @@
             transform: rotate(-45deg) translate(7px, -6px);
         }
 
-        .banner-principal {
-            background: linear-gradient(rgba(173, 106, 108, 0.85), rgba(139, 83, 85, 0.85)), url('imagens/banner-fundo.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-            margin-bottom: 30px;
-        }
-
-        .banner-principal h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        .slogan {
-            font-size: 1.2rem;
-            font-style: italic;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            opacity: 0.95;
-            color: #fce4e6;
-        }
-
-        .banner-principal p {
-            font-size: 1.05rem;
-            margin-bottom: 25px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-banner {
-            background-color: white;
-            color: #ad6a6c;
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: 0.2s;
-            display: inline-block;
-        }
-
-        .btn-banner:hover {
-            background-color: #f1f1f1;
-            transform: translateY(-2px);
-        }
-
-        .secao-titulo {
-            text-align: center;
-            color: #55282a;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .produtos-container {
-            display: flex;
-            gap: 20px;
-            padding: 0 30px 40px 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .produto {
+        .sobre-container {
+            max-width: 700px;
+            margin: 60px auto;
             background: white;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             text-align: center;
-            width: 220px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .produto-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-bottom: 12px;
+        .sobre-container h1 {
+            color: #55282a;
+            font-size: 2rem;
+            margin-bottom: 25px;
         }
 
-        .produto h3 {
-            font-size: 1rem;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .produto p {
-            color: #ad6a6c;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .produto button {
-            background-color: #ad6a6c;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.2s;
-            width: 100%;
-        }
-
-        .produto button:hover {
-            background-color: #8b5355;
+        .sobre-container p {
+            color: #444;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin: 0;
         }
 
         .gaveta {
@@ -388,7 +303,7 @@
         </div>
     </header>
 
-   <nav class="nav-bar" id="nav-menu">
+    <nav class="nav-bar" id="nav-menu">
         <ul>
             <li><a href="index.html">Início</a></li>
             <li><a href="sobre.html">Sobre</a></li>
@@ -402,21 +317,9 @@
     </nav>
 
     <main>
-        <section class="banner-principal">
-            <h1>Bem-vindo à Smart Look</h1>
-            <p class="slogan">O visual do futuro.<br>O conforto de hoje.</p>
-            <p>Descubra soluções inovadoras e inteligentes para organizar o seu dia a dia com muito estilo.</p>
-            <a href="produtos.html" class="btn-banner">Ver Todos os Produtos</a>
-        </section>
-
-        <h2 class="secao-titulo">Destaques da Semana</h2>
-        <section class="produtos-container">
-            <div class="produto">
-                <img src="imagens/guarda-roupa.jpg" alt="Guarda Roupa Inteligente" class="produto-img">
-                <h3>Guarda Roupa Inteligente</h3>
-                <p>R$ 449,99</p>
-                <button onclick="adicionarAoCarrinho('Guarda Roupa Inteligente', 449.99, 'imagens/guarda-roupa.jpg')">Adicionar</button>
-            </div>
+        <section class="sobre-container">
+            <h1>Quem somos?</h1>
+            <p>A SmartLook é uma empresa de móveis inteligentes, onde aprimoramos invenções e autentificamos para ficar ainda mais útil e inovador.</p>
         </section>
     </main>
 
@@ -452,12 +355,6 @@
         function toggleCarrinho() {
             const gaveta = document.getElementById('gaveta-carrinho');
             gaveta.classList.toggle('ativa');
-        }
-
-        function adicionarAoCarrinho(nome, preco, imagem) {
-            carrinho.push({ nome, preco, imagem });
-            salvarEAtualizar();
-            toggleCarrinho(); 
         }
 
         function removerDoCarrinho(index) {
